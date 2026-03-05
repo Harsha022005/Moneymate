@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import UnauthenticatedNavbar from "../components/unauthnavbar";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
@@ -106,7 +106,7 @@ export default function DuplicateDashboard() {
     }
   };
 
-  const calculatePieChartData = () => {
+  const calculatePieChartData = useCallback(() => {
     const categoryExpenses = expensesdata.reduce((acc, expense) => {
       acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
       return acc;
@@ -128,7 +128,7 @@ export default function DuplicateDashboard() {
     };
     setPiechartdata(chartData);
     console.log("Pie Chart Data:", chartData);
-  };
+  }, [expensesdata]);
 
   useEffect(() => {
     console.log("Total Expenses (updated):", totalexpenses);
