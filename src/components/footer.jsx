@@ -18,13 +18,13 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-gray-300">Home</a>
+                <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="hover:text-gray-300 text-left w-full">Home</button>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">Services</a>
+                <button onClick={() => console.log('Services clicked')} className="hover:text-gray-300 text-left w-full">Services</button>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">Contact</a>
+                <button onClick={() => console.log('Contact clicked')} className="hover:text-gray-300 text-left w-full">Contact</button>
               </li>
             </ul>
           </div>

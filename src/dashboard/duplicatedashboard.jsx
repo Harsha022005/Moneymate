@@ -138,7 +138,7 @@ export default function DuplicateDashboard() {
     if (expensesdata.length > 0) {
       calculatePieChartData();
     }
-  }, [expensesdata]);
+  }, [expensesdata, calculatePieChartData]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
