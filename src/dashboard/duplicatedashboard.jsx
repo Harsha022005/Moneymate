@@ -16,6 +16,7 @@ export default function DuplicateDashboard() {
   const [remainders, setRemainders] = useState([]);
   const [totalexpenses, setTotalexpenses] = useState(0);
   const [piechartdata, setPiechartdata] = useState({});
+  const [totcurrentMonthExpenses, settotcurrentMonthExpenses] = useState(null);
 
   const limit = 15;
 
@@ -30,6 +31,9 @@ export default function DuplicateDashboard() {
       const backendURL = process.env.REACT_APP_URL;
       const response = await axios.post(`${backendURL}/userdash/getexpenses`, { botid, offset: 0, limit });
 
+      const currentMonthExpenses=await axios.post(`${backendURL}/userdash/getexpenses/getCurrentMonthexpenses`,{botid});
+      settotcurrentMonthExpenses(currentMonthExpenses.data.currentMonthExpenses);
+      console.log("Current Month Expenses:", currentMonthExpenses.data.currentMonthExpenses);
       if (response.data.success) {
         setExpensesdata(response.data.expenses);
         console.log(response.data.expenses);
@@ -253,9 +257,9 @@ export default function DuplicateDashboard() {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white">Total Expenses</h3>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white">Current Month Expenses</h3>
                   <p className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">
-                    ₹{totalexpenses.toLocaleString()}
+                    ₹{totcurrentMonthExpenses}
                   </p>
                 </div>
                 <div className="text-2xl sm:text-3xl md:text-4xl text-blue-500">💰</div>
